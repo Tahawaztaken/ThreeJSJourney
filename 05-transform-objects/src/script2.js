@@ -53,7 +53,7 @@ const sizes = {
  */
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = -20
-camera.lookAt(shaft.position)
+camera.lookAt(0, 0, -7)
 scene.add(camera)
 
 
@@ -64,4 +64,15 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.setSize(sizes.width, sizes.height)
-renderer.render(scene, camera)
+
+
+//Animation
+const tick = () => {
+    //Update group
+    group.rotation.y +=0.01
+    renderer.render(scene, camera)
+    
+    window.requestAnimationFrame(tick)
+}
+
+tick()
