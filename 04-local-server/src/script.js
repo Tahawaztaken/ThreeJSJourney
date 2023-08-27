@@ -43,22 +43,23 @@ scene.add(pointLight)
 // const plHelper = new THREE.PointLightHelper(pointLight, 25)
 // scene.add(plHelper)
 
+const container = document.querySelector(".webgl")
+
 const sizes = {
-    width: 1000,
-    height: 800
+    width: window.innerWidth,
+    height: window.innerHeight
 }
 
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = 30
 scene.add(camera)
 
-
-
 const canvas = document.querySelector('.webgl')
 const renderer = new THREE.WebGLRenderer({
-    canvas: canvas
+    canvas: canvas,
+    alpha: true // Make the canvas background transparent
 })
-renderer.setSize(sizes.width, sizes.height)
+renderer.setSize(sizes.width, sizes.height) // Update canvas size on window resize
 
 
 let angle = 2.5; // Initial rotation angle
@@ -78,6 +79,5 @@ function animate() {
 
     renderer.render(scene, camera)
 }
-
 
 animate()
