@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
 
 const scene = new THREE.Scene()
 
@@ -46,9 +47,10 @@ scene.add(pointLight)
 const container = document.querySelector(".webgl")
 
 const sizes = {
-    width: window.innerWidth,
+    width: 1000,
     height: window.innerHeight
 }
+
 
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = 30
@@ -62,10 +64,21 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height) // Update canvas size on window resize
 
 
+const controls = new OrbitControls(camera, renderer.domElement)
+
+controls.enablePan = false
+controls.enableZoom = false
+controls.enableDamping = true
+
+
 let angle = 2.5; // Initial rotation angle
 let angle2 = -5.9;
 
+
+
+
 function animate() {
+    controls.update()
     requestAnimationFrame(animate)
 
     // Update rotation angle
@@ -80,4 +93,9 @@ function animate() {
     renderer.render(scene, camera)
 }
 
+
+
+
+
 animate()
+
